@@ -9,9 +9,9 @@
 
 <body>
     <h1 th:text="'Best of the year by ' + ${nome}" />
-    <a th:href="/movies">Vai alla lista dei film</a>
+    <a th:href="@{/movies}">Vai alla lista dei film</a>
     <br>
-    <a href="/songs">Vai alla lista delle canzoni</a>
+    <a th:href="@{/songs}">Vai alla lista delle canzoni</a>
 </body>
 
 </html>
