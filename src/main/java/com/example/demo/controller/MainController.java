@@ -6,10 +6,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.controller.model.Movie;
 import com.example.demo.controller.model.Song;
+
 
 
 
@@ -85,5 +87,32 @@ public class MainController {
         model.addAttribute("titles", titles);
         return "songs";
     }
+
+    @GetMapping("/movies/{id}")
+    public String moviesId(@PathVariable int id, Model model) {
+        Movie movie = getBestMovies().stream().filter(m -> m.getId() == id).findFirst().orElse(null);
+
+        String title;
+        if (movie != null){
+            title = movie.getTitolo();
+        } else {
+            title = "Film non trovato";
+        }
+        model.addAttribute("title", title);
+        return "detail";
+    }
     
+    @GetMapping("/songs/{id}")
+    public String songDetail(@PathVariable int id, Model model) {
+        Song song = getBestSongs().stream().filter(s -> s.getId() == id).findFirst().orElse(null);
+
+        String title;
+        if (song != null){
+            title = song.getTitolo();
+        } else {
+            title = "Canzone non trovata";
+        }
+        model.addAttribute("title", title);
+        return "detail";
+    }
 }
